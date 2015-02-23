@@ -23,7 +23,7 @@
 #
 define php::ini (
   $value        = '',
-  $template     = 'extra-ini.erb',
+  $template     = 'php/extra-ini.erb',
   $target       = 'extra.ini',
   $sapi_target  = 'all',
   $service      = $php::service,
@@ -41,14 +41,14 @@ define php::ini (
 
     file { "${config_dir}${http_sapi}conf.d/${target}":
       ensure  => 'present',
-      content => template("php/${template}"),
+      content => template($template),
       require => Package['php'],
       before  => File["${config_dir}/cli/conf.d/${target}"],
     }
 
     file { "${config_dir}/cli/conf.d/${target}":
       ensure  => 'present',
-      content => template("php/${template}"),
+      content => template($template),
       require => Package['php'],
       notify  => Service[$service],
     }
@@ -57,7 +57,7 @@ define php::ini (
 
     file { "${config_dir}/${sapi_target}/conf.d/${target}":
       ensure  => 'present',
-      content => template("php/${template}"),
+      content => template($template),
       require => Package['php'],
       notify  => Service[$service],
     }

@@ -55,7 +55,7 @@ define php::module (
 
   include php
 
-  if $absent {
+  if $absent != '' {
     $real_version = 'absent'
   } else {
     $real_version = $version

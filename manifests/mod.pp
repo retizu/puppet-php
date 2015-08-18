@@ -59,10 +59,10 @@ define php::mod (
   }
 
   exec { "php_mod_tool_${name}":
-    command     => "${php_mod_tool} ${name}",
-    path        => $path,
-    notify      => $real_service_autorestart,
-    require     => Package['php'],
+    command => "${php_mod_tool} ${name}",
+    path    => $path,
+    notify  => $real_service_autorestart,
+    require => Package['php'],
   }
 
 }

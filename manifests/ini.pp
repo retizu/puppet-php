@@ -27,7 +27,8 @@ define php::ini (
   $target       = 'extra.ini',
   $sapi_target  = 'all',
   $service      = $php::service,
-  $config_dir   = $php::config_dir
+  $config_dir   = $php::config_dir,
+  $package      = $php::package
 ) {
 
   include php
@@ -42,14 +43,14 @@ define php::ini (
     file { "${config_dir}${http_sapi}conf.d/${target}":
       ensure  => 'present',
       content => template($template),
-      require => Package['php'],
+      require => Package[$package],
       before  => File["${config_dir}/cli/conf.d/${target}"],
     }
 
     file { "${config_dir}/cli/conf.d/${target}":
       ensure  => 'present',
       content => template($template),
-      require => Package['php'],
+      require => Package[$package],
       notify  => Service[$service],
     }
 
@@ -58,7 +59,7 @@ define php::ini (
     file { "${config_dir}/${sapi_target}/conf.d/${target}":
       ensure  => 'present',
       content => template($template),
-      require => Package['php'],
+      require => Package[$package],
       notify  => Service[$service],
     }
 

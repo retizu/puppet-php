@@ -261,7 +261,7 @@ class php (
     mode    => $php::config_file_mode,
     owner   => $php::config_file_owner,
     group   => $php::config_file_group,
-    require => Package['php'],
+    require => Package[$php::package],
     source  => $php::manage_file_source,
     content => $php::manage_file_content,
     replace => $php::manage_file_replace,
@@ -274,7 +274,7 @@ class php (
     file { 'php.dir':
       ensure  => directory,
       path    => $php::config_dir,
-      require => Package['php'],
+      require => Package[$php::package],
       source  => $php::source_dir,
       recurse => true,
       links   => follow,

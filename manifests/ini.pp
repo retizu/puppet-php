@@ -54,7 +54,6 @@ define php::ini (
     }
 
   }else{
-
     file { "${config_dir}/${sapi_target}/conf.d/${target}":
       ensure  => 'present',
       content => template($template),

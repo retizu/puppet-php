@@ -222,13 +222,14 @@ class php (
     false => true,
   }
 
-  if ($php::source and $php::template) {
+  if ($php::source != '' and $php::source != false and $php::template != '' and
+  $php::template != false) {
     fail ('PHP: cannot set both source and template')
   }
-  if ($php::source and $php::bool_augeas) {
+  if ($php::source != '' and $php::source != false and $php::bool_augeas) {
     fail ('PHP: cannot set both source and augeas')
   }
-  if ($php::template and $php::bool_augeas) {
+  if ($php::template != '' and $php::template != false and $php::bool_augeas) {
     fail ('PHP: cannot set both template and augeas')
   }
 
@@ -269,7 +270,7 @@ class php (
   }
 
   # The whole php configuration directory can be recursively overriden
-  if $php::source_dir {
+  if $php::source_dir != '' and $php::source_dir != false {
     file { 'php.dir':
       ensure  => directory,
       path    => $php::config_dir,
@@ -286,7 +287,7 @@ class php (
 
 
   ### Include custom class if $my_class is set
-  if $php::my_class {
+  if $php::my_class != '' and  $php::my_class != false {
     include $php::my_class
   }
 

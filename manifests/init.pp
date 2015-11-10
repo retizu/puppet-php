@@ -249,9 +249,8 @@ class php (
   }
 
   ### Managed resources
-  package { 'php':
+  package { $php::package:
     ensure          => $php::manage_package,
-    name            => $php::package,
     install_options => $php::install_options,
   }
 
